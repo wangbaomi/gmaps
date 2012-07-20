@@ -1,0 +1,73 @@
+<h1>Listing characters</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Address</th>
+    <th>Longitude</th>
+    <th>Latitude</th>
+    <th>Gmaps</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @characters.each do |character| %>
+  <tr>
+    <td><%= character.name %></td>
+    <td><%= character.address %></td>
+    <td><%= character.longitude %></td>
+    <td><%= character.latitude %></td>
+    <td><%= character.gmaps %></td>
+    <td><%= link_to 'Show', character %></td>
+    <td><%= link_to 'Edit', edit_character_path(character) %></td>
+    <td><%= link_to 'Destroy', character, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Character', new_character_path %>
+
+
+
+<%= gmaps({
+    #"map_options" => {"libraries" => ["weather"],"container_id" => "connections_map_container", "auto_adjust" => "true", "bounds" => '[{"lat": 0, "lng": 0 }, {"lat": 80 , "lng": 100 }]'},
+    #"markers" => {"data" => @json, "options" => {"list_container" => "markers_list" } },
+
+      
+    #:map_options => { :raw => "{styles: customStyle, disableDefaultUI: true}"},
+    :markers     => { "data" => @places },
+    
+    
+    
+    
+    
+    #"polylines"   => { "data" => ' [ [
+    #                    {"lng": -122.214897, "lat": 37.772323},
+    #                     {"lng": -157.821856, "lat": 21.291982},
+    #                     {"lng": 178.431, "lat": -18.142599},
+    #                     {"lng": 153.027892, "lat": -27.46758}
+    #                     ],
+    #                     [
+    #                     {"lng": -120.214897, "lat": 30.772323, "strokeColor": "#000", "strokeWeight" : 2 },
+    #                     {"lng": -10.821856, "lat": 50.291982}
+    #                     ] ]' },
+    # "polygons"    => { "data" => '[ [
+    #                     {"lng": -80.190262, "lat": 25.774252}, 
+    #                     {"lng": -66.118292, "lat": 18.466465},
+    #                     {"lng": -64.75737, "lat": 32.321384}
+    #                     ] ]' },
+    #"circles"     => { "data" => '[
+    #                     {"lng": -122.214897, "lat": 37.772323, "radius": 1000000},
+    #                     {"lng": 122.214897, "lat": 37.772323, "radius": 1000000, "strokeColor": "#FF0000"}
+    #                     ]',
+    #                                    },
+     "direction"   => { "data"    => { "from" => "电子科大清水河校区", "to" => "电子科大"} ,
+                        "options" => { "travelMode" => "DRIVING", "display_panel" => true, "panel_id" => "instructions"}
+ }
+    })
+    %>
+
+<ul id="markers_list">  </ul>
